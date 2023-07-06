@@ -1,0 +1,98 @@
+% Copyright (c) 2023 Kees Zeelenberg
+%
+% Permission is granted to copy, distribute and/or modify this
+% software under the terms of the LaTeX Project Public License
+% (LPPL), version 1.3c.
+%
+% This software is provided 'as is', without warranty of any kind,
+% either expressed or implied, including, but not limited to, the
+% implied warranties of merchantability and fitness for a
+% particular purpose.
+%
+\ProvidesPackage{cleverefstyle}[2023/06/25 v0.1]
+\NeedsTeXFormat{LaTeX2e}[2020/01/01]    % LaTeX 2.09 and LaTeX2e before LaTeX3 can't be used (nor non-LaTeX)
+\DeclareOption{noabbrev}{}
+\ProcessOptions\relax
+\RequirePackage{etoolbox}
+\RequirePackageWithOptions{cleveref}
+\makeatletter
+\ExplSyntaxOn
+\NewDocumentCommand{\MakeTitlecaseFirst}{m}{\text_titlecase_first:n{#1}}
+\ExplSyntaxOff
+\AddToHook{package/refstyle/after}{%
+     \RenewDocumentCommand{\RS@ifundefined}{mmm}{\relax}
+     \RenewDocumentCommand{\newref}{mm}{\relax}
+}
+\NewDocumentCommand\mklcrefcmd{mmm}{%
+     \ExpandArgs{c}#3{#1ref}{om}{%
+          \IfNoValueTF{##1}
+               {\cref{#2:##2}}%
+               {\namecrefs{#2:##2} \labelcref{#2:##2}}%
+     }
+}
+\NewDocumentCommand\mkucrefcmd{mmm}{%
+     \ExpandArgs{c}#3{#1ref}{om}{%
+          \IfNoValueTF{##1}
+               {\Cref{#2:##2}}%
+               {\nameCrefs{#2:##2} \labelcref{#2:##2}}%
+     }
+}
+\NewDocumentCommand\newlcrefcmd{m}{%
+     \mklcrefcmd{#1}{#1}{\NewDocumentCommand}
+}
+\NewDocumentCommand\renewlcrefcmd{m}{%
+     \mklcrefcmd{#1}{#1}{\RenewDocumentCommand}
+}
+\NewDocumentCommand\newucrefcmd{m}{%
+     \mkucrefcmd{\MakeTitlecaseFirst{#1}}{#1}{\NewDocumentCommand}
+}
+\NewDocumentCommand\renewucrefcmd{m}{%
+     \mkucrefcmd{\MakeTitlecaseFirst{#1}}{#1}{\RenewDocumentCommand}
+}
+\NewDocumentCommand\newrefcmd{m}{%
+     \mklcrefcmd{#1}{#1}{\NewDocumentCommand}
+     \mkucrefcmd{\MakeTitlecaseFirst{#1}}{#1}{\NewDocumentCommand}
+}
+\NewDocumentCommand\renewrefcmd{m}{%
+     \mklcrefcmd{#1}{#1}{\RenewDocumentCommand}
+     \mkucrefcmd{\MakeTitlecaseFirst{#1}}{#1}{\RenewDocumentCommand}
+}  
+\makeatother
+\IfPackageLoadedTF{amsmath}{\renewlcrefcmd{eq}}{\newlcrefcmd{eq}}
+\newucrefcmd{eq}
+\newrefcmd{ack}
+\newrefcmd{alg}
+\newrefcmd{appendix}
+\newrefcmd{assu}
+\newrefcmd{axm}
+\newrefcmd{chap}
+\newrefcmd{claim}
+\newrefcmd{conc}
+\newrefcmd{cond}
+\newrefcmd{conj}
+\newrefcmd{cor}
+\newrefcmd{cri}
+\newrefcmd{def}
+\newrefcmd{enu}
+\newrefcmd{exa}
+\newrefcmd{exer}
+\newrefcmd{fact}
+\newrefcmd{fig}
+\newrefcmd{fn}
+\newrefcmd{footn}
+\newrefcmd{lem}
+\newrefcmd{nota}
+\newrefcmd{note}
+\newrefcmd{par}
+\newrefcmd{part}
+\newrefcmd{prob}
+\newrefcmd{prop}
+\newrefcmd{pty}
+\newrefcmd{que}
+\newrefcmd{sec}
+\newrefcmd{solu}
+\newrefcmd{subsec}
+\newrefcmd{sum}
+\newrefcmd{tab}
+\newrefcmd{thm}
+%
