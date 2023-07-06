@@ -1,0 +1,21 @@
+#\DeclareLyXModule[cleverefstyle.sty]{Cleveref}
+#DescriptionBegin
+#Replace refstyle by cleveref.
+# You must still choose refstyle as reference style; see 
+# Document / Settings / Document class / Use refstyle instead of prettyref ...
+#DescriptionEnd
+
+# Original Author : Kees Zeelenberg
+
+Format 66
+
+Provides refstyle 1
+
+AddToPreamble
+	\AddToHook{package/refstyle/after}{%
+		\RenewDocumentCommand{\RS@ifundefined}{mmm}{\relax}
+		\RenewDocumentCommand{\newref}{mm}{\relax}
+}
+	\AtEndPreamble{\RequirePackage[]{cleverefstyle}}
+EndPreamble
+
