@@ -1,4 +1,4 @@
 # cleverefstyle
 cleverefstyle is a LaTeX package that provides an interface between the packages refstyle and cleveref, which provide mechanisms for labeling and referring to references in LaTex documents. It may be especially useful for LyX users, since from 2022 onwards the use of refstyle within LyX clashes with amsmath.
 cleverefstyle ensures that when macros from refstyle are called within a LaTeX document, they are replaced by equivalent calls to macros from cleveref. For example, the call ref{eq:eq1} is replaced by the call cref{eq:eq1}.
-LyX users may call the LyX module cleveref.layout, which takes care that one may use the same LyX commands for referencing as when refstyle were used. It also disables the automatic call by LyX of refstyle when the refstyle option is ticked in the document settings within LyX.
+LyX users may call the LyX module cleveref.module, which takes care that one may use the same LyX commands for referencing as when refstyle were used. It also disables the automatic call by LyX of refstyle when the refstyle option is ticked in the document settings within LyX. 
